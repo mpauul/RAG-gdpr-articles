@@ -90,5 +90,5 @@ if __name__ == '__main__':
 
     articles_jsons = [article.to_json() for article in extract_articles(reader, article_summaries)] 
 
-    with open("data/articles.json", "w") as file_write:
+    with open("../data/articles.json", "w") as file_write:
         json.dump(articles_jsons, file_write)
