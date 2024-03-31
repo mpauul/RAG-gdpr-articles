@@ -3,6 +3,8 @@
 ## STEP 1 - Install the requirements
 Create a new environment either by using conda or pythone venv tool
 
+The system uses ChromaDB as vector store which uses Rust programming language under the hood.
+If you don't have Rust installed yet, open a terminal and run `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` as recommended here[https://rustup.rs/]
 `pip install requirements.txt`
 
 ## STEP 2 - Load and extract the articles and their content
