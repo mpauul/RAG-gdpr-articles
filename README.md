@@ -32,7 +32,13 @@ If you don't have Rust installed yet run the following command in the terminal:
 
 Both of these 2 files can be found in the data directory from this repository
 
-2. Before we run the python script 
+2. Before we run the python script for parsing and extracting the content for each article, we must first add the absolute path of the repository directory.
+
+`if __name__ == '__main__':`
+    `## modify the root dir path with the absolut path of the repository directory`
+    `root_dir_path = '' # <- modify here`
+    `root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example`
+    
 Provide the absolute path for both the GDPR articles pdf
 
 ## STEP 3 - Split and vectorize the content
