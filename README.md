@@ -1,7 +1,9 @@
 # GDPR RAG 
 
 ## STEP 1 - Install the requirements
-Create a new environment either by using conda or pythone venv tool
+Create a new python virtual environment either by:
+- using conda: `conda create -n rag_env python=3.10`and then `conda activate rag_env` 
+- python venv: `python3 -m venv rag_env` and then `source ./python_env/bin/activate`
 
 The system uses ChromaDB as vector store which uses Rust programming language under the hood.
 If you don't have Rust installed yet, open a terminal and run `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` as recommended here[https://rustup.rs/]

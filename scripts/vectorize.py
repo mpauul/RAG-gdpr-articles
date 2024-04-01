@@ -6,10 +6,11 @@ import chromadb
 import json
 
 if __name__ == '__main__':
-    ## modify the absolute filepaths accordingly
-    article_output_filepath = "/Users/mihai.paul/Desktop/work/__cp/data/articles.json"
-    vectordb_dir_path = '/Users/mihai.paul/Desktop/work/__cp/data/vector_db'
-    models_base_dir_path = '/Users/mihai.paul/Desktop/work/__cp/base_models'
+    root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example
+    # root_dir_path = '' # <- modify here
+    article_output_filepath = "{root_dir_path}/data/articles.json"
+    vectordb_dir_path = '{root_dir_path}/data/vector_db'
+    models_base_dir_path = '{root_dir_path}/base_models'
 
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=120, 

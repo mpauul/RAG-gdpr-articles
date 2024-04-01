@@ -79,10 +79,12 @@ def extract_articles(pdf_reader, a_summaries_lst):
     return articles
 
 if __name__ == '__main__':
-    ## modify the absolute filepaths accordingly
-    articles_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/GDPR Art 1-21.pdf'
-    articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/summaries.txt'
-    article_output_filepath = "/Users/mihai.paul/Desktop/work/__cp/data/articles.json"
+    ## modify the root dir path with the absolut path of the repository directory
+    root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example
+    # root_dir_path = '' # <- modify here
+    articles_filepath = '{root_dir_path}/data/GDPR Art 1-21.pdf'
+    articles_summaries_filepath = '{root_dir_path}/data/summaries.txt'
+    article_output_filepath = "{root_dir_path}/data/articles.json"
     
     article_summaries = []
     with open(articles_summaries_filepath,'r') as file:

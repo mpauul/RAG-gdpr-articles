@@ -8,9 +8,9 @@ from langchain.chains import LLMChain
 from langchain_core.prompts import PromptTemplate
 
 ## API keys 
-os.environ["REPLICATE_API_TOKEN"] = 'r8_RsYg2RKzsNTWgTPudRNJAn8Y0zeaKTI2igYVX' ##eve
+# os.environ["REPLICATE_API_TOKEN"] = 'r8_RsYg2RKzsNTWgTPudRNJAn8Y0zeaKTI2igYVX' ##eve
 # os.environ["REPLICATE_API_TOKEN"] = 'r8_CIBwMVAQtwzz0Gy5D7bIDESNijRxF1x4KxEzv' ##my wife
-# os.environ["REPLICATE_API_TOKEN"] = 'r8_HiLENm5B958iAi3IkS93BdoQj56MlUu0DS4WU' ##eu
+os.environ["REPLICATE_API_TOKEN"] = 'r8_HiLENm5B958iAi3IkS93BdoQj56MlUu0DS4WU' ##eu
 
 
 from scripts.utils import extract_articles,read_content
@@ -19,7 +19,7 @@ def retrieve_vector_db(db_collection, embdeding_model, query, articles_in =[rang
     return db_collection.query(
         query_embeddings = embdeding_model.encode(query).tolist(),
         n_results = n_results,
-        where={"article_number": {"$in": articles_in}}
+        where={"article_number": {"$in": articles_in}} ## only look for retrieval in the relevant articles
     )['documents']
 
 
@@ -56,13 +56,14 @@ def get_relevant_articles(summaries_content, query):
         input=input_replicate
     )
     
-    print(''.join(output))
     return extract_articles(''.join(output))
 
 if __name__ == '__main__':
-    vectordb_dir_path = '/Users/mihai.paul/Desktop/work/__cp/data/vector_db'
-    models_base_dir_path = '/Users/mihai.paul/Desktop/work/__cp/base_models'
-    articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/summaries.txt'
+    root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example
+    # root_dir_path = '' # <- modify here
+    vectordb_dir_path = '{root_dir_path}/data/vector_db'
+    models_base_dir_path = '{root_dir_path}/base_models'
+    articles_summaries_filepath = '{root_dir_path}/data/summaries.txt'
 
 
     ## load summaries content
@@ -81,26 +82,25 @@ if __name__ == '__main__':
         streaming=True,
         callbacks=[StreamingStdOutCallbackHandler()],
         model="a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5",
-        model_kwargs={"temperature": 0.75, "max_length": 4096,"max_new_tokens":1024, "top_p": 1},
+        model_kwargs={"temperature": 0.75, "max_length": 4096,"max_new_tokens":2048, "top_p": 1},
     )
 
 
     while(True): ## infinite loop for continuous prompting
+
         ## get the user prompt
         user_query = input("\nYour prompt: ")
         print('Processing the prompt...(please wait)')
+
         ## stop whenever the letter q is enterd
         if user_query == 'q':
             print("STOP looping")
             break
         
-        ## get the relevant context
+        ## get the relevant articles numbers for context
         relevant_articles = get_relevant_articles(summaries_content,user_query)
-        retrieved_chunks = retrieve_vector_db(articles_collection, embedding_model, user_query, relevant_articles, n_results=5)        
+        retrieved_chunks = retrieve_vector_db(articles_collection, embedding_model, user_query, relevant_articles, n_results=3)        
         context = '\n\n\n'.join(retrieved_chunks[0])
-
-        print(context)
-        print('='*500)
 
         ## create the llm prompt and run it through llm
         prompt = f'''
@@ -113,5 +113,10 @@ if __name__ == '__main__':
             [/INST]
         '''
         print('Answer: ')
+        print('**'*2**7)
         llm(prompt)
+        print('\n')
+        print('**'*2**7)
+        print('\n')
+
 
