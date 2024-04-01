@@ -59,10 +59,9 @@ def get_relevant_articles(summaries_content, query):
 if __name__ == '__main__':
     root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example
     # root_dir_path = '' # <- modify here
-    vectordb_dir_path = '{root_dir_path}/data/vector_db'
-    models_base_dir_path = '{root_dir_path}/base_models'
-    articles_summaries_filepath = '{root_dir_path}/data/summaries.txt'
-
+    articles_summaries_filepath = '{}/data/summaries.txt'.format(root_dir_path)
+    vectordb_dir_path = '{}/data/vector_db'.format(root_dir_path)
+    models_base_dir_path = '{}/base_models'.format(root_dir_path)
 
     ## load summaries content
     summaries_content = read_content(articles_summaries_filepath)

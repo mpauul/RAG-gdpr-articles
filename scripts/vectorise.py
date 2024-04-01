@@ -8,9 +8,9 @@ import json
 if __name__ == '__main__':
     root_dir_path = '/Users/mihai.paul/Desktop/work/rag-app' ## Example
     # root_dir_path = '' # <- modify here
-    article_output_filepath = "{root_dir_path}/data/articles.json"
-    vectordb_dir_path = '{root_dir_path}/data/vector_db'
-    models_base_dir_path = '{root_dir_path}/base_models'
+    article_output_filepath = "{}/data/articles.json".format(root_dir_path)
+    vectordb_dir_path = '{}/data/vector_db'.format(root_dir_path)
+    models_base_dir_path = '{}/base_models'.format(root_dir_path)
 
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=120, 
