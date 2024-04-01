@@ -7,10 +7,8 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import LLMChain
 from langchain_core.prompts import PromptTemplate
 
-## API keys 
-# os.environ["REPLICATE_API_TOKEN"] = 'r8_RsYg2RKzsNTWgTPudRNJAn8Y0zeaKTI2igYVX' ##eve
-# os.environ["REPLICATE_API_TOKEN"] = 'r8_CIBwMVAQtwzz0Gy5D7bIDESNijRxF1x4KxEzv' ##my wife
-os.environ["REPLICATE_API_TOKEN"] = 'r8_HiLENm5B958iAi3IkS93BdoQj56MlUu0DS4WU' ##eu
+## API keys
+os.environ["REPLICATE_API_TOKEN"] = ''
 
 
 from scripts.utils import extract_articles,read_content
