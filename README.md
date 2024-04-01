@@ -101,3 +101,11 @@ if __name__ == '__main__':
 - After the context is fully extracted, it's then provided as input context to the `Llama2-13B-chat` model hosted by `Replicate`, that is responsable for generating the final output to the user.
 - After the output is generated, the system will prompt the user again for a query until `q` is provided to it
 
+## Rag-gdpr usage prompts examples
+
+1. What is a controller?
+2. What rights do I have when it comes to my private data
+3. Tell me about data transparency
+4. How can I delete my data from other records?
+5. What can a controller do with my data?
+6. What is the scope of these articles?
