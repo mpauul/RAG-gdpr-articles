@@ -14,9 +14,9 @@ This repository holds the **Retrieval Augmented Generation (RAG)** system collec
 
 1. Create a new python virtual environment either by:
 - using conda: `conda create -n rag_env python=3.10`and then `conda activate rag_env` 
-- python venv: `python3 -m venv rag_env` and then `source ./python_env/bin/activate`
+- python venv: `python3 -m venv rag_env` and then `source path/to/envs/rag_env/bin/activate`
 
-2. In the newly created virtual environment, run `pip install requirements.txt`
+2. In the newly created virtual environment, run `pip install -r requirements.txt`
 
 **NOTE:** The rag app uses ChromaDB as vector store which in turn uses Rust programming language under the hood.
 
