@@ -76,8 +76,7 @@ if __name__ == '__main__':
 
 Now that we have the entire GDPR content vectorized, we can now use it for contextualized text generation.
 
-1. Before we run the python app for for prompt-based text generation, we must first modify the root_dir_path with the absolute path of the repository directory.
-
+1. Before we run the python app for for prompt-based text generation, we must first modify the root_dir_path with the absolute path of the repository directory. Also, create a Replicate account using a Github account [here](https://replicate.com/signin?next=/). This account will give you a few free inference runs of any models that replicate has on their model zoo.
 
 In `rag_app.py :`
 
@@ -85,6 +84,7 @@ In `rag_app.py :`
 os.environ["REPLICATE_API_TOKEN"] = '' <-write your Replicate token here
 
 ```
+
 
 ```
 if __name__ == '__main__':
