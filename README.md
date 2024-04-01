@@ -1,6 +1,13 @@
-# GDPR RAG 
+## GDPR RAG 
 
 This repository holds the **Retrieval Augmented Generation (RAG)** system collection of code dedicated to efficiently handling the extraction, vectorization, and retrieval of data pertinent to GDPR articles from PDF documents. 
+
+### Technology stack used:
+1. Python
+2. ChromaDB
+3. Numpy
+4. Langchain
+5. Replicate
 
 ## STEP 1 - Install the requirements
 
@@ -19,11 +26,13 @@ If you don't have Rust installed yet run the following command in the terminal:
 
 ## STEP 2 - Load and extract the articles and their content
 
-The input files we are working with are:
-- the actual GDPR articles pdf file 
-- a summaries.txt file that contains the metadata (article number, title and summary) for each article 
-Both of these 2 files can be found in the data directory
+1. The two input files that contain the GDPR articles content are:
+- the **actual GDPR articles pdf file**
+- a **summaries.txt file** that contains the metadata (article number, title and summary) for each article 
 
+Both of these 2 files can be found in the data directory from this repository
+
+2. Before we run the python script 
 Provide the absolute path for both the GDPR articles pdf
 
 ## STEP 3 - Split and vectorize the content
