@@ -95,9 +95,9 @@ if __name__ == '__main__':
 
 2. In the terminal, run `python rag_app.py`. This command will:
 - Prompt the user to provide a prompt/query/question that (ideally) is concerning any of the topics found in the GDPR articles.
-- the user query it's them analysed by an LLM `(Mistral-7B)` in order to determine the most relevant GDPR Article(s) for the query. This LLM is  able to direct the RAG system to search within the context of the selected Article(s), improving the relevance and accuracy of the responses. 
+- the user query it's them analysed by an LLM `(Mistral-7B)` hosted by `Replicate` in order to determine the most relevant GDPR Article(s) for the query. This LLM is  able to direct the RAG system to search within the context of the selected Article(s), improving the relevance and accuracy of the responses. 
 - In order to achieve this, the LLM takes the articles summaries and the user query and determines the most relevant articles wherein the context for the final answer should be retrieved.
 - The context is filtered during the retrieval from Chroma VectorDB based on the relevant articles extracted
-- After the context is fully extracted, it's then provided as input context to the Llama2-13B chat model, that is responsable for generating the final output to the user.
+- After the context is fully extracted, it's then provided as input context to the `Llama2-13B-chat` model hosted by `Replicate`, that is responsable for generating the final output to the user.
 - After the output is generated, the system will prompt the user again for a query until `q` is provided to it
 
