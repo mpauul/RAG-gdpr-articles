@@ -8,7 +8,7 @@ This repository holds the **Retrieval Augmented Generation (RAG)** system collec
 3. Numpy
 4. Langchain
 5. Replicate
-6. Sentence Transformer
+6. Sentence Transformers
 
 ## STEP 1 - Install the requirements
 
@@ -68,6 +68,7 @@ if __name__ == '__main__':
 ```
 
 2. In the terminal, run `python scripts/vectorise.py`. This command will (for each article):
+- load and use the `sentence-transformers/all-mpnet-base-v2` model locally. **This will take few minutes since it is downloading the model parameters and configuration** 
 - split the content into smaller chunks. The chunking strategy is to treat each line of the content as an individual chunk, thus keeping each line short in order to embbed a smaller chunk into a vector (for better semantics embedding) 
 - vectorise each chunk and add it into the vectorDB for retrieval. The vectorisation is done using the `sentence-transformers/all-mpnet-base-v2` model.
 - persist the VectorDB in a in the **data/vector_db** directory`
