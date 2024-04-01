@@ -60,7 +60,7 @@ def extract_articles(pdf_reader, a_summaries_lst):
     if is_title_page(page_content):
         article_number = extract_article_number(page_content)
         article_obj = Document(article_number,a_summaries_lst[first_article_index],'')
-        print("Processing Article ",article_number)
+        # print("Processing Article ",article_number)
 
     for page_index in tqdm(range(1,pages_count),desc="Processing pages: "):
         page_content = pdf_reader.pages[page_index].extract_text()
@@ -68,7 +68,7 @@ def extract_articles(pdf_reader, a_summaries_lst):
             articles.append(article_obj)
             article_number = extract_article_number(page_content)
             article_obj = Document(article_number,a_summaries_lst[article_number-1],'')
-            print("Processing Article ",article_number)
+            # print("Processing Article ",article_number)
         else:
             article_obj.set_article_content(
                 article_obj.get_article_content()+'\n'+
@@ -79,9 +79,11 @@ def extract_articles(pdf_reader, a_summaries_lst):
     return articles
 
 if __name__ == '__main__':
-    articles_filepath = '/Users/mihai.paul/Desktop/work/rag-GDPR/data/GDPR Art 1-21.pdf'
-    articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/rag-GDPR/data/summaries.txt'
-
+    ## modify the absolute filepaths accordingly
+    articles_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/GDPR Art 1-21.pdf'
+    articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/summaries.txt'
+    article_output_filepath = "/Users/mihai.paul/Desktop/work/__cp/data/articles.json"
+    
     article_summaries = []
     with open(articles_summaries_filepath,'r') as file:
         article_summaries = [line for line in file.readlines() if line!='\n']
@@ -90,5 +92,5 @@ if __name__ == '__main__':
 
     articles_jsons = [article.to_json() for article in extract_articles(reader, article_summaries)] 
 
-    with open("../data/articles.json", "w") as file_write:
+    with open(article_output_filepath, "w+") as file_write:
         json.dump(articles_jsons, file_write)

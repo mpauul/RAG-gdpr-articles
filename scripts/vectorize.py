@@ -6,6 +6,9 @@ import chromadb
 import json
 
 if __name__ == '__main__':
+    article_output_filepath = "/Users/mihai.paul/Desktop/work/__cp/data/articles.json"
+    vectordb_dir_path = '/Users/mihai.paul/Desktop/work/__cp/data/vector_db'
+
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=120, 
         chunk_overlap=30,  # number of tokens overlap between chunks
@@ -13,11 +16,11 @@ if __name__ == '__main__':
     )
 
     articles_lst = []
-    with open('../data/articles.json') as json_file:
+    with open(article_output_filepath) as json_file:
         articles_lst = json.load(json_file)
 
     ## initiate Chroma vectorDB locally
-    chroma_client = chromadb.PersistentClient(path='./vector_db')
+    chroma_client = chromadb.PersistentClient(path=vectordb_dir_path)
     collection = chroma_client.get_or_create_collection(name="gdpr-articles")
 
     ## initiate embedding model
@@ -36,7 +39,7 @@ if __name__ == '__main__':
         ## embbed the extracted chunks
         article_chunks_embeddings = embedding_model.encode(article_chunks)
         print("Article chunks embedding shape: ",article_chunks_embeddings.shape)
-        print("tyope: ",type(article_chunks_embeddings))
+        print("type: ",type(article_chunks_embeddings))
 
         ## create the metadata 
         article_metadata = [{'article_number':article['article_number'], 'article_summary':article['article_summary']} for i in range(len(article_chunks))]
@@ -47,13 +50,7 @@ if __name__ == '__main__':
         articles_chunks_embeddings.append(article_chunks_embeddings)
 
 
-
-    # print("text chunks:",len(articles_chunks))
-    # print("Metadata: ",len(articles_metadata))
-
     stacked_articles_chunks_embeddings = np.vstack(tuple(articles_chunks_embeddings))
-    # # print(articles_chunks_embeddings)
-    # print(stacked_articles_chunks_embeddings.shape)
 
     ## persist the chunks and their embeddings in the vectorDB        
     collection.add(
