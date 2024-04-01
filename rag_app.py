@@ -13,9 +13,6 @@ os.environ["REPLICATE_API_TOKEN"] = 'r8_RsYg2RKzsNTWgTPudRNJAn8Y0zeaKTI2igYVX' #
 # os.environ["REPLICATE_API_TOKEN"] = 'r8_HiLENm5B958iAi3IkS93BdoQj56MlUu0DS4WU' ##eu
 
 
-## file paths
-articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/rag-GDPR/summaries.txt'
-
 from scripts.utils import extract_articles,read_content
 
 def retrieve_vector_db(db_collection, embdeding_model, query, articles_in =[range(0,21)],n_results=3):
@@ -63,16 +60,21 @@ def get_relevant_articles(summaries_content, query):
     return extract_articles(''.join(output))
 
 if __name__ == '__main__':
+    vectordb_dir_path = '/Users/mihai.paul/Desktop/work/__cp/data/vector_db'
+    models_base_dir_path = '/Users/mihai.paul/Desktop/work/__cp/base_models'
+    articles_summaries_filepath = '/Users/mihai.paul/Desktop/work/__cp/data/summaries.txt'
+
+
     ## load summaries content
     summaries_content = read_content(articles_summaries_filepath)
 
     ## load vectordb
-    client = chromadb.PersistentClient(path='/Users/mihai.paul/Desktop/work/rag-GDPR/scripts/vector_db')
+    client = chromadb.PersistentClient(path=vectordb_dir_path)
     print("Chroma DB articles collection: ",client.list_collections())
     articles_collection = client.get_collection("gdpr-articles")
 
     ## load embedding model
-    embedding_model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2', cache_folder = './base_models')
+    embedding_model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2', cache_folder = models_base_dir_path)
     
     ## initiate the llm chat model
     llm = Replicate(
